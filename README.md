@@ -1,124 +1,105 @@
 # ⚖️ Mobile Game Mechanic Compliance Pre-screener
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Style: Compliance](https://img.shields.io/badge/Role-Compliance_Specialist-orange.svg)](#)
-[![LLM: Cross-Compatible](https://img.shields.io/badge/LLM-Cross--Compatible-brightgreen.svg)](#)
-[![Contributions: Welcome](https://img.shields.io/badge/PRs-welcome-blueviolet.svg)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![LLM: Cross-Compatible](https://img.shields.io/badge/LLM-Cross--Compatible-brightgreen.svg)](#setup)
 
-> **Save your studio from devastating app store rejections, dark-pattern lawsuits, and global policy fines *before* writing a single line of code.**
+> **Screen a proposed game mechanic against app store policies and consumer protection rules before you build it.**
 
 ---
 
 ## 🔍 Overview
 
-The **Mobile Game Mechanic Compliance Pre-screener** is a professional-grade system prompt (AI Skill) designed specifically for Game Producers, Monetization Designers, and Product Managers. It transforms any advanced LLM into a **Strict Mobile Game Compliance Analyst** to audit proposed features, gacha systems, subscriptions, and live-ops events against global platform guidelines and consumer protection laws.
+The **Mobile Game Mechanic Compliance Pre-screener** is a system prompt ([`system_prompt.md`](./system_prompt.md)) for Game Producers, Monetization Designers, and Product Managers. It instructs an LLM to act as a **Strict Mobile Game Compliance Analyst** and review proposed features, gacha systems, subscriptions, and live-ops events against the platform policies and regulations in its reference library.
+
+The output is a first-pass screen, not legal advice. Have a qualified lawyer review anything you plan to ship.
 
 ```mermaid
 graph TD
     A[Proposed Game Mechanic / Spec] --> B[AI Compliance Pre-Screener]
-    B --> C{Platform & Legal Auditing}
+    B --> C{Platform & Legal Review}
     C -->|Apple App Store Review| D[Guidelines 3.1.1 & 3.1.2]
-    C -->|Google Play Developer| E[Monetization & Gambling Policies]
-    C -->|EU / UK Protection| F[UCPD & DSA Article 25]
+    C -->|Google Play Developer| E[Payments, Subscriptions & Gambling Policies]
+    C -->|EU / UK Protection| F[UCPD, DSA Article 25 & UK DMCC Act]
     C -->|Asian Gaming Laws| G[JOGA, S.Korea & China NPPA]
     C -->|Minor Protection| H[COPPA & GDPR-K]
     D & E & F & G & H --> I[Consolidated Analysis Report]
-    I --> J[Risk Assessment: High/Medium/Low]
-    I --> K[Detailed Legal/Policy Rationale with URLs]
-    I --> L[Actionable Business Pivots & Solutions]
+    I --> J[Risk Level: High/Medium/Low]
+    I --> K[Policy Rationale with URLs]
+    I --> L[Recommended Pivot/Fix]
 ```
 
 ---
 
 ## ⚡ The Problem It Solves
 
-Modern mobile game monetization is highly scrutinized. Releasing an update with a non-compliant monetization mechanic or a deceptive user flow can lead to:
-*   ❌ **Devastating App Store Rejections** during critical live-ops campaigns.
-*   📉 **Wasted Development Cycles** building features that must be completely redesigned.
-*   ⚖️ **Multi-Million Dollar Fines** under EU/US consumer protection frameworks for "dark patterns."
+A monetization mechanic or user flow that breaks platform or consumer protection rules can lead to:
+*   ❌ **App Store or Google Play rejections** during live-ops campaigns.
+*   📉 **Wasted development cycles** on features that must be redesigned.
+*   ⚖️ **Regulatory enforcement** under EU, UK and US consumer protection law for deceptive design ("dark patterns").
 
-This pre-screener provides an immediate, strict compliance audit with actionable pivots, ensuring your game mechanics remain highly profitable and legally sound.
+The pre-screener gives each issue a risk level, the specific policy it touches, a rationale with the source URL, and a suggested pivot that keeps the business goal.
 
 ---
 
 ## 📚 Supported Regulations & Policies
 
-The pre-screener references a comprehensive library of policies and legal standards:
+The prompt's reference library cites these sources:
 
 | Framework / Region | Covered Topics & Requirements | Key Reference Source |
 | :--- | :--- | :--- |
-| **Apple App Store** | Loot Box Odds (3.1.1), Subscription Transparency (3.1.2) | [App Store Guidelines](https://developer.apple.com/app-store/review/guidelines/) |
-| **Google Play** | Subscription Billing, Deceptive Systems, Gambling Elements | [Play Developer Policies](https://play.google.com/about/developer-content-policy/policy-monetization-ads/) |
-| **European Union** | Dark Patterns, False Urgency, DSA Article 25 Manipulations | [EU UCPD 2005/29/EC](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32005L0029) |
-| **United Kingdom** | Subscription Auto-renewals & CMA Guidance | [EU DSA Article 25](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022R2065) |
-| **United States** | Minor protection, age gating, and data collection gates | [US COPPA Rule](https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa) |
-| **Japan** | Complete Gacha (Comp Gacha) ban, gacha odds disclosures, caps | [JOGA Guidelines](https://japanonlinegame.org/guideline/) |
-| **South Korea** | Mandatory public loot box drop rates & consumer deception | [Game Industry Promotion Act](https://elaw.klri.re.kr/eng_service/lawMain.do) |
-| **China** | Anti-addiction, minor spending/time caps, real-name checks | [NPPA Gaming Rules](https://www.nppa.gov.cn/) |
+| **Apple App Store** | Loot Box Odds (3.1.1), Non-expiring IAP Currency (3.1.1), Subscriptions (3.1.2) | [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) |
+| **Google Play** | Loot Box Odds Disclosure, Subscription Transparency & Cancellation, Real-Money Gambling | [Payments policy](https://support.google.com/googleplay/android-developer/answer/9858738), [Subscriptions policy](https://support.google.com/googleplay/android-developer/answer/9900533), [Real-Money Gambling policy](https://support.google.com/googleplay/android-developer/answer/9877032) |
+| **European Union** | Dark Patterns, False Urgency, Deceptive Interface Design (DSA Article 25) | [EU UCPD 2005/29/EC](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32005L0029), [EU DSA (Regulation 2022/2065)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022R2065) |
+| **United Kingdom** | Unfair Commercial Practices under the DMCC Act 2024 (misleading and aggressive practices) | [CMA guidance: Unfair commercial practices (CMA207)](https://www.gov.uk/government/publications/unfair-commercial-practices-cma207) |
+| **United States** | Children's privacy and data collection (under 13) | [US COPPA Rule](https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa) |
+| **EU (minors)** | Conditions for children's consent (GDPR Article 8) | [GDPR Article 8](https://gdpr-info.eu/art-8-gdpr/) |
+| **Japan** | Complete Gacha (Kompu Gacha) ban, gacha odds disclosure | [JOGA Guidelines](https://japanonlinegame.org/joga_guideline/joga-guideline/) |
+| **South Korea** | Mandatory disclosure of probability-based item rates (Article 33(2)) | [Game Industry Promotion Act (KLRI English translation)](https://elaw.klri.re.kr/eng_service/lawView.do?hseq=62498&lang=ENG) |
+| **China** | Anti-addiction, minor spending/time caps, real-name checks | [NPPA](https://www.nppa.gov.cn/) |
+
+Regulations change. The model only knows what is in the reference library plus its own training data, so check the linked source before acting on a finding.
 
 ---
 
-## 🛠️ Setup & Installation
+## 🛠️ Setup
 
-You can load this prompt into any advanced LLM. For best results, use models with strong reasoning capabilities (such as **Claude 3.5 Sonnet** or **GPT-4o**).
+You can load this prompt into any chat LLM that accepts a system prompt or custom instructions. A current reasoning-capable model works best, for example any current Claude, GPT or Gemini model.
 
-### Option 1: ChatGPT / Custom GPT
-1. Navigate to **Explore GPTs** -> **Create**.
-2. Go to the **Configure** tab.
-3. In **Instructions**, copy and paste the entire contents of [`system_prompt.md`](./system_prompt.md).
-4. Save as a private or organization-wide GPT named **"Game Mechanic Compliance Auditor"**.
+### Option 1: ChatGPT (Custom GPT)
+1. Go to **GPTs** -> **Create**.
+2. Open the **Configure** tab.
+3. In **Instructions**, paste the entire contents of [`system_prompt.md`](./system_prompt.md).
+4. Save it as a private or organization-wide GPT, for example **"Game Mechanic Compliance Auditor"**.
 
-### Option 2: Claude (Anthropic)
-1. Start a new chat or open a **Project** in Claude.com.
-2. If in a Project, paste the contents of [`system_prompt.md`](./system_prompt.md) into the **Project Instructions** or **System Prompt** settings.
-3. Submit your design specs and mechanic write-ups for evaluation.
+### Option 2: Claude
+1. In Claude, create a new **Project**.
+2. Paste the contents of [`system_prompt.md`](./system_prompt.md) into the project's **Instructions**.
+3. Start a chat in the project and submit your design specs.
 
-### Option 3: Local LLMs (Ollama / LibreChat)
-1. Copy the system prompt contents from [`system_prompt.md`](./system_prompt.md).
-2. Configure your System Instructions in LibreChat, Open-WebUI, or within your `Modelfile` for Ollama.
-3. Set the temperature to a low setting (e.g., `0.2` - `0.3`) to ensure high factual accuracy and adherence to the reference links.
+Without a Project, paste the prompt as your first message and the spec as your second.
+
+### Option 3: Local LLMs (Ollama / LibreChat / Open WebUI)
+1. Copy the contents of [`system_prompt.md`](./system_prompt.md).
+2. Set it as the system prompt in LibreChat or Open WebUI, or as the `SYSTEM` instruction in an Ollama `Modelfile`.
+3. Set a low temperature (for example `0.2` to `0.3`) to reduce variation between runs.
 
 ---
 
 ## 🚀 Quick Start / Try It Out
 
-We have provided a highly realistic, complex monetization scenario inside [`test_case_input.md`](./test_case_input.md). You can use it to test the prompt's analysis.
+[`test_case_input.md`](./test_case_input.md) contains a sample monetization spec with deliberate problems you can use to test the prompt.
 
 ### How to Test:
-1. Load the [`system_prompt.md`](./system_prompt.md) into your chosen LLM as the system instruction.
-2. Copy and paste the contents of [`test_case_input.md`](./test_case_input.md) into the chat.
-3. Observe how the LLM systematically dissects:
-   *   **Gacha transparency violations** (South Korea Game Industry Promotion Act / Apple Guideline 3.1.1).
-   *   **Subscription cancellation dark patterns** (EU UCPD / Google Play Policy / Apple Guideline 3.1.2).
-   *   **Aggressive FOMO mechanics** (EU DSA Article 25).
-   *   **Minor-focused designs without age verification gates** (COPPA / GDPR-K / NPPA).
+1. Load [`system_prompt.md`](./system_prompt.md) into your chosen LLM as the system instruction.
+2. Paste the contents of [`test_case_input.md`](./test_case_input.md) into the chat.
+3. The spec is written to trigger findings in these areas:
+   *   **Undisclosed gacha odds** (Apple Guideline 3.1.1 / Google Play Payments policy / South Korea Game Industry Promotion Act).
+   *   **Subscription cancellation friction** (EU UCPD / Google Play Subscriptions policy / Apple Guideline 3.1.2).
+   *   **Expiring paid currency and false urgency** (Apple Guideline 3.1.1 / EU UCPD / EU DSA Article 25).
+   *   **Child-appealing design without age gates** (COPPA / GDPR-K).
 
 ---
 
 ## 📄 License
 
-This repository is licensed under the **MIT License**. Feel free to use, modify, and distribute it inside your game studio or as part of your open-source workflow.
-
-```text
-MIT License
-
-Copyright (c) 2026
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
+This repository is licensed under the [MIT License](LICENSE). Copyright (c) 2026 Rahul M Shah.
